@@ -15,7 +15,7 @@ def signup(request):
             except User.DoesNotExist:
                 user = User.objects.create_user(request.POST['username'], password=request.POST['password1'])
                 login(request, user)
-                return render(request, 'accounts/signup.html')
+                return render(request, 'accounts/login.html', {'error': 'SignUp Successful'})
         else:
             return render(request, 'accounts/signup.html', {'error': 'Passwords don\'t match'})
     else:
@@ -27,7 +27,7 @@ def log_in(request):
         user = authenticate(username=request.POST['username'], password=request.POST['password'])
         if user is not None:
             login(request, user)
-            return render(request, 'accounts/login.html', {'error': 'Login Successful'})
+            return render(request, 'accounts/login.html', {'error': 'LogIn Successful'})
         else:
             return render(request, 'accounts/login.html', {'error': 'The Username or Password didn\'t match'})
     else:
